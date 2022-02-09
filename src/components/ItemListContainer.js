@@ -1,10 +1,7 @@
 import React from 'react';
-import { ListGroup } from 'react-bootstrap';
 
-const ItemListContainer = () => {
-  return <ListGroup>- NFT Ape monkey
-      NFT monkey ape
-  </ListGroup>;
+const ItemListContainer = ({nombreEmp}) => {
+  return <p>{nombreEmp}</p>;
 };
 
 export default ItemListContainer;
