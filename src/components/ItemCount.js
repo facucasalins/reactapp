@@ -1,21 +1,38 @@
-import React, { useState } from 'react';
+import React from "react";
+import { useCounter } from "./useCounter";
+import CartWidgetApp from "./Cartwidget";
 
+const ItemCount = ({ stock, initial }) => {
+  const { counter, increment, decrement } = useCounter(initial);
+  const onAdd = () => {
+    if (stock > 0 && counter !== stock) {
+      increment();
+    }
+  };
+  const onRest = () => {
+    if (counter > 0) {
+      decrement();
+    }
+  };
 
-export default function Contador(stock, inicial) {
-    const [contador, setContador] = useState(0);
-
-
-
-    return (
-        <div>
-        <div>{contador}</div>
-            <button onClick={() => setContador(contador + 1)}>Agregar al carrito</button>
-            <button onClick={() => setContador(contador - 1)}>-</button>
-            <button onClick={() => setContador(0)}>Reiniciar</button>
-
+  return (
+    <>
+      <div className="card">
+        <div className="card__controllers">
+          <button className="btn__primary--small" onClick={() => onRest()}>
+            -
+          </button>
+          <h2>{counter}</h2>
+          <button className="btn__primary--small" onClick={() => onAdd()}>
+            +
+          </button>
         </div>
+        <button className="btn__primary--big btn__add">
+          Add <CartWidgetApp counter={counter} counterIndication={false} />
+        </button>
+      </div>
+    </>
+  );
+};
 
-
-
-        )
-}
+export default ItemCount;
